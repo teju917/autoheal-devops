@@ -2,6 +2,10 @@ pipeline {
 
     agent any
 
+    options {
+        skipDefaultCheckout(true) // jenkins automatically do  checkout so we are mnetioning taht dont do automaticallly we are managin it 
+    }
+
     stages {
 
         stage('Checkout') {
@@ -12,13 +16,13 @@ pipeline {
 
         stage('Backend Install') {
             steps {
-                bat 'cd backend && npm install'
+                bat 'cd backend && npm ci'
             }
         }
 
         stage('Frontend Install') {
             steps {
-                bat 'cd frontend && npm install'
+                bat 'cd frontend && npm ci'
             }
         }
 
@@ -27,7 +31,6 @@ pipeline {
                 bat 'cd frontend && npm run build'
             }
         }
-
     }
 
     post {
