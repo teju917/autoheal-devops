@@ -39,9 +39,17 @@ pipeline {
                 bat 'cd frontend && npm run build'
             }
         }
+
+        stage('Docker Check') {
+            steps {
+                bat 'docker --version'
+                bat 'docker compose version'
+            }
+        }
     }
 
     post {
+
         success {
             echo 'CI Pipeline completed successfully!'
         }
